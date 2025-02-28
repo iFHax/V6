@@ -1,0 +1,16 @@
+<p style="text-align:center; font-weight:bold; font-size:24px;">
+    <span style="color:#ff0000;">W</span>
+    <span style="color:#ff7f00;">W</span>
+    <span style="color:#ffff00;">W</span>.
+    <span style="color:#00ff00;">D</span>
+    <span style="color:#0000ff;">O</span>
+    <span style="color:#4b0082;">T</span>
+    <span style="color:#9400d3;">Y</span>
+    <span style="color:#ff0000;">C</span>
+    <span style="color:#ff7f00;">A</span>
+    <span style="color:#ffff00;">T</span>.
+    <span style="color:#00ff00;">C</span>
+    <span style="color:#0000ff;">O</span>
+    <span style="color:#4b0082;">M</span>
+</p>
+
