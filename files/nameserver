@@ -1,21 +1,28 @@
 #!/bin/sh
-REPOS="https://github.com/SETANTAZVPN/abc/raw/ipuk/"
 NS_DOMAIN=$(cat /etc/xray/ns_domain)
 
 setup_dnstt() {
 	cd
 	rm -rf *
 	mkdir -p /etc/slowdns
-	wget -O dnstt-server "${REPOS}slowdns/dnstt-server" >/dev/null 2>&1
+	wget -O dnstt-server "https://raw.githubusercontent.com/iFHax/V6/refs/heads/main/files/dnstt-server" >/dev/null 2>&1
 	chmod +x dnstt-server >/dev/null 2>&1
-	wget -O dnstt-client "${REPOS}slowdns/dnstt-client" >/dev/null 2>&1
+	wget -O dnstt-client "https://raw.githubusercontent.com/iFHax/V6/refs/heads/main/files/dnstt-client" >/dev/null 2>&1
 	chmod +x dnstt-client >/dev/null 2>&1
 	./dnstt-server -gen-key -privkey-file server.key -pubkey-file server.pub
 	chmod +x *
 	mv * /etc/slowdns
-	wget -O /etc/systemd/system/client.service "${REPOS}slowdns/client" >/dev/null 2>&1
-	wget -O /etc/systemd/system/server.service "${REPOS}slowdns/server" >/dev/null 2>&1
+
+	# Download and configure systemd services
+	wget -O /etc/systemd/system/client.service "https://raw.githubusercontent.com/iFHax/V6/refs/heads/main/files/client" >/dev/null 2>&1
+	wget -O /etc/systemd/system/server.service "https://raw.githubusercontent.com/iFHax/V6/refs/heads/main/files/server" >/dev/null 2>&1
 	sed -i "s/xxxx/$NS_DOMAIN/g" /etc/systemd/system/client.service 
 	sed -i "s/xxxx/$NS_DOMAIN/g" /etc/systemd/system/server.service 
+
+	# Reload systemd, enable and start services
+	systemctl daemon-reload
+	systemctl enable client.service server.service
+	systemctl start client.service server.service
 } 
+
 setup_dnstt
