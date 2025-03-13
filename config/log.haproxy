@@ -1,0 +1,12 @@
+/var/log/haproxy.log {
+    daily
+    rotate 52
+    missingok
+    notifempty
+    compress
+    delaycompress
+    su root root
+    postrotate
+        systemctl restart haproxy > /dev/null
+    endscript
+}
